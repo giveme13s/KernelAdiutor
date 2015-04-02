@@ -118,11 +118,6 @@ public class RecyclerViewFragment extends Fragment {
 
             @Override
             protected Void doInBackground(Void... params) {
-                try {
-                    if (isAdded()) init(savedInstanceState);
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
-                }
                 return null;
             }
 
