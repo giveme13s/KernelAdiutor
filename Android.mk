@@ -31,4 +31,12 @@ LOCAL_STATIC_JAVA_LIBRARIES +=  android-support-v4 \
                                 android-support-v7-appcompat \
                                 android-support-annotations
 
+LOCAL_STATIC_JAVA_LIBRARIES += libdashclock
+
 include $(BUILD_PACKAGE)
+
+include $(CLEAR_VARS)
+
+LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := libdashclock:lib/dashclock-api-r2.0.jar
+
+include $(BUILD_MULTI_PREBUILT)
