@@ -99,8 +99,7 @@ public abstract class RecyclerViewFragment extends Fragment implements IRecycler
         progressBar = new ProgressBar(getActivity());
         setProgressBar(progressBar);
 
-        if (!showApplyOnBoot())
-            getParentView(R.layout.recyclerview_vertical).findViewById(R.id.apply_on_boot_layout).setVisibility(View.GONE);
+        if (!showApplyOnBoot()) showApplyOnBoot(false);
 
         new CardViewTask().execute(savedInstanceState);
 
