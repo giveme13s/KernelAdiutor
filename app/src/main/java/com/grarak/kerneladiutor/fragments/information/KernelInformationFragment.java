@@ -34,9 +34,15 @@ public class KernelInformationFragment extends RecyclerViewFragment {
     }
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView(){
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         CardViewItem.DCardView kernelVersionCard = new CardViewItem.DCardView();
         kernelVersionCard.setTitle(getString(R.string.kernel_version));
         kernelVersionCard.setDescription(Info.getKernelVersion());

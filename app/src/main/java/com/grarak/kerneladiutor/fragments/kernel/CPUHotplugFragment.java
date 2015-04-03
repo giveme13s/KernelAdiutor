@@ -123,9 +123,15 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
     private SeekBarCardView.DSeekBarCardView mAlucardHotplugCpuUpRateCard;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         if (CPUHotplug.hasMpdecision()) mpdecisionInit();
         if (CPUHotplug.hasIntelliPlug()) intelliPlugInit();
         if (CPUHotplug.hasBluPlug()) bluPlugInit();

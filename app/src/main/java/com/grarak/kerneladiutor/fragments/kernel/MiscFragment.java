@@ -54,9 +54,15 @@ public class MiscFragment extends RecyclerViewFragment implements PopupCardItem.
     private SwitchCompatCardItem.DSwitchCompatCard mDynamicFsyncCard;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         tcpCongestionInit();
         if (Misc.hasVibration()) vibrationInit();
         if (Misc.hasSmb135xWakeLock()) smb135xWakeLockInit();

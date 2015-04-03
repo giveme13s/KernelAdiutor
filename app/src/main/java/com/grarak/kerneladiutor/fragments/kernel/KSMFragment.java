@@ -44,9 +44,15 @@ public class KSMFragment extends RecyclerViewFragment implements Constants,
     private SeekBarCardView.DSeekBarCardView mPagesToScanCard, mSleepMillisecondsCard;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         ksmInfoInit();
         ksmInit();
     }

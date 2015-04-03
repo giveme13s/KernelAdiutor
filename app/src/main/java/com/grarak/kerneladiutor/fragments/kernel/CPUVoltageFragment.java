@@ -52,9 +52,15 @@ public class CPUVoltageFragment extends RecyclerViewFragment {
     }
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         mVoltageCard = new EditTextCardView.DEditTextCard[CPUVoltage.getFreqs().size()];
         List<String> voltages = CPUVoltage.getVoltages();
         if (voltages == null) return;

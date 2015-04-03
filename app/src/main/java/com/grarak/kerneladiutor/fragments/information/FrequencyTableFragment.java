@@ -64,13 +64,19 @@ public class FrequencyTableFragment extends RecyclerViewFragment implements Cons
      */
     private boolean _updatingData;
 
+    @Override
+    public void preInitCardView() {
+    }
+
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
     /**
      * Initialize the Fragment
      */
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
-
+    public void initCardView(Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.frequency_table_fragment, container, false);
         _uiStatesView = (LinearLayout) view.findViewById(R.id.ui_states_view);
 

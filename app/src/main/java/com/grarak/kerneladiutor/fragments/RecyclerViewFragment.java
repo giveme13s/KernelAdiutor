@@ -44,10 +44,16 @@ import com.grarak.kerneladiutor.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+interface IRecyclerView {
+    public void preInitCardView();
+    public void initCardView(Bundle savedInstanceState);
+    public void postInitCardView(Bundle savedInstanceState);
+}
+
 /**
  * Created by willi on 22.12.14.
  */
-public class RecyclerViewFragment extends Fragment {
+public abstract class RecyclerViewFragment extends Fragment implements IRecyclerView {
 
     protected View view;
     protected LayoutInflater inflater;
@@ -96,51 +102,7 @@ public class RecyclerViewFragment extends Fragment {
         if (!showApplyOnBoot())
             getParentView(R.layout.recyclerview_vertical).findViewById(R.id.apply_on_boot_layout).setVisibility(View.GONE);
 
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        hand = new Handler();
-                    }
-                });
-                views.clear();
-                adapter = new DAdapter.Adapter(views);
-                try {
-                    if (isAdded()) preInit(savedInstanceState);
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-
-                recyclerView.setAdapter(adapter);
-                animateRecyclerView();
-                if (hand != null) hand.post(run);
-
-                try {
-                    ((ViewGroup) progressBar.getParent()).removeView(progressBar);
-                } catch (NullPointerException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    if (isAdded()) postInit(savedInstanceState);
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.execute();
+        new CardViewTask().execute(savedInstanceState);
 
         return view;
     }
@@ -195,15 +157,6 @@ public class RecyclerViewFragment extends Fragment {
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(progressBar, new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
                 ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER_VERTICAL | Gravity.END));
-    }
-
-    public void preInit(Bundle savedInstanceState) {
-    }
-
-    public void init(Bundle savedInstanceState) {
-    }
-
-    public void postInit(Bundle savedInstanceState) {
     }
 
     public void addView(DAdapter.DView view) {
@@ -300,6 +253,58 @@ public class RecyclerViewFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         if (hand != null) hand.removeCallbacks(run);
+    }
+
+    private class CardViewTask extends AsyncTask<Bundle, Bundle, Bundle> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    hand = new Handler();
+                }
+            });
+            views.clear();
+            adapter = new DAdapter.Adapter(views);
+            try {
+                if (isAdded()) preInitCardView();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected Bundle doInBackground(Bundle... params) {
+            Bundle savedInstanceState = params[0];
+            try {
+                if (isAdded()) initCardView(savedInstanceState);
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            }
+            return savedInstanceState;
+        }
+
+        @Override
+        protected void onPostExecute(Bundle savedInstanceState) {
+            super.onPostExecute(savedInstanceState);
+
+            recyclerView.setAdapter(adapter);
+            animateRecyclerView();
+            if (hand != null) hand.post(run);
+
+            try {
+                ((ViewGroup) progressBar.getParent()).removeView(progressBar);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (isAdded()) postInitCardView(savedInstanceState);
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

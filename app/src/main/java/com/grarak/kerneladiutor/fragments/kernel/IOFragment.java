@@ -47,9 +47,15 @@ public class IOFragment extends RecyclerViewFragment implements Constants, Popup
     private PopupCardItem.DPopupCard mInternalReadAheadCard, mExternalReadAheadCard;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         readheads.clear();
         internalStorageInit();
         if (IO.hasExternalStorage()) externalStorageInit();

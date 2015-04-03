@@ -46,9 +46,15 @@ public class WakeFragment extends RecyclerViewFragment implements PopupCardItem.
     private SwitchCompatCardItem.DSwitchCompatCard mPowerKeySuspendCard;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         if (Wake.hasDt2w()) dt2wInit();
         if (Wake.hasS2w()) s2wInit();
         if (Wake.hasT2w()) t2wInit();

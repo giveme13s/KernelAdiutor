@@ -73,9 +73,15 @@ public class CPUFragment extends RecyclerViewFragment implements Constants, View
     private PopupCardItem.DPopupCard mCpuBoostInputFreqCard;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         usageInit();
         if (CPU.getFreqs() != null) {
             coreInit();

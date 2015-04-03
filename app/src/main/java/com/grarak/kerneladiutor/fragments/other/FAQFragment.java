@@ -33,9 +33,15 @@ public class FAQFragment extends RecyclerViewFragment {
     }
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         CardViewItem.DCardView mMisspelledCard = new CardViewItem.DCardView();
         mMisspelledCard.setTitle(getString(R.string.misspelled));
         mMisspelledCard.setDescription(getString(R.string.misspelled_summary));

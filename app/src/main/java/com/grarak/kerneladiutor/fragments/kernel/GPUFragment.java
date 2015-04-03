@@ -47,9 +47,15 @@ public class GPUFragment extends RecyclerViewFragment implements PopupCardItem.D
     private SeekBarCardView.DSeekBarCardView mSimpleGpuLazinessCard, mSimpleGpuRampThresoldCard;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         curFreqInit();
         maxFreqInit();
         governorInit();

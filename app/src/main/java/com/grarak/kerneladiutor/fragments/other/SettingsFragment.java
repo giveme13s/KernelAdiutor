@@ -47,9 +47,15 @@ public class SettingsFragment extends RecyclerViewFragment {
     }
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         darkthemeInit();
         if (!Resources.getSystem().getConfiguration().locale.getLanguage().startsWith("en"))
             forceenglishlanguageInit();

@@ -92,9 +92,11 @@ public class ScreenFragment extends RecyclerViewFragment implements SeekBarCardV
     private SeekBarCardView.DSeekBarCardView mBackLightDimmerOffsetCard;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
 
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         screenColorInit();
         backlightDimmerInit();
         if (Screen.hasKGamma()) kgammaInit();
@@ -103,9 +105,7 @@ public class ScreenFragment extends RecyclerViewFragment implements SeekBarCardV
     }
 
     @Override
-    public void preInit(Bundle savedInstanceState) {
-        super.preInit(savedInstanceState);
-
+    public void preInitCardView() {
         mPreviewIconView = new ImageView(getActivity());
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, (int) (getResources().getDisplayMetrics().density * 150));

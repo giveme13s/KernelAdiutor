@@ -94,8 +94,15 @@ public class BuildpropFragment extends RecyclerViewFragment implements View.OnCl
     }
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
+
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         hand = getHandler();
 
         buildpropItem = Buildprop.getProps();

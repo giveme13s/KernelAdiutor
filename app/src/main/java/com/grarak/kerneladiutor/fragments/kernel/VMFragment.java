@@ -31,9 +31,15 @@ public class VMFragment extends RecyclerViewFragment {
     private EditTextCardView.DEditTextCard[] mVMCard;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         mVMCard = new EditTextCardView.DEditTextCard[VM.getVMfiles().size()];
         for (int i = 0; i < mVMCard.length; i++) {
             String value = VM.getVMValue(VM.getVMfiles().get(i));

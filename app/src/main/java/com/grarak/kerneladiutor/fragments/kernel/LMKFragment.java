@@ -43,9 +43,15 @@ public class LMKFragment extends RecyclerViewFragment implements Constants {
             "2048,4096,8192,16384,24576,32768", "4096,8192,16384,32768,49152,65536"};
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         values.clear();
         modifiedvalues.clear();
         for (int x = 0; x < 257; x++) {

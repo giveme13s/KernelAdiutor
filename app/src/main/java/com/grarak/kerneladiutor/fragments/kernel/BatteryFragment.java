@@ -50,9 +50,11 @@ public class BatteryFragment extends RecyclerViewFragment implements
     private SeekBarCardView.DSeekBarCardView mBlxCard;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         batteryLevelInit();
         batteryVoltageInit();
         batteryTemperatureInit();
@@ -63,8 +65,7 @@ public class BatteryFragment extends RecyclerViewFragment implements
     }
 
     @Override
-    public void postInit(Bundle savedInstanceState) {
-        super.postInit(savedInstanceState);
+    public void postInitCardView(Bundle savedInstanceState) {
         if (getCount() < 4) showApplyOnBoot(false);
     }
 

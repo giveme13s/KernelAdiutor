@@ -39,9 +39,15 @@ public class SoundFragment extends RecyclerViewFragment implements
     private SeekBarCardView.DSeekBarCardView mHeadphonePowerAmpGainCard;
 
     @Override
-    public void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    public void preInitCardView() {
+    }
 
+    @Override
+    public void postInitCardView(Bundle savedInstanceState) {
+    }
+
+    @Override
+    public void initCardView(Bundle savedInstanceState) {
         if (Sound.hasSoundControlEnable()) soundControlEnableInit();
         if (Sound.hasHeadphoneGain()) headphoneGainInit();
         if (Sound.hasHandsetMicrophoneGain()) handsetMicrophoneGainInit();
