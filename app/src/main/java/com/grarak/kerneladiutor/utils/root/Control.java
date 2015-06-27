@@ -33,7 +33,7 @@ import java.util.List;
 public class Control implements Constants {
 
     public enum CommandType {
-        GENERIC, CPU, FAUX_GENERIC, CUSTOM
+        GENERIC, CPU, FAUX_GENERIC, SELINUX, CUSTOM
     }
 
     public static void commandSaver(final Context context, final String path, final String command) {
@@ -75,6 +75,10 @@ public class Control implements Constants {
                 Utils.stringToInt(value.split(" ")[1])) : value + " " + getChecksum(Utils.stringToInt(value), 0);
         run("echo " + value + " > " + file, file + "nochecksum", context);
         run("echo " + command + " > " + file, file, context);
+    }
+
+    private static void runSelinux(int value, Context context) {
+        run("setenforce " + value, SELINUX, context);
     }
 
     public static void setProp(String key, String value, Context context) {
@@ -130,6 +134,8 @@ public class Control implements Constants {
                     runGeneric(file, value, id, context);
                 } else if (command == CommandType.FAUX_GENERIC) {
                     runFauxGeneric(file, value, context);
+                } else if (command == CommandType.SELINUX) {
+                    runSelinux(Utils.stringToInt(value), context);
                 } else if (command == CommandType.CUSTOM) {
                     Control.run(value, id == null ? file : file + id, context);
                 }

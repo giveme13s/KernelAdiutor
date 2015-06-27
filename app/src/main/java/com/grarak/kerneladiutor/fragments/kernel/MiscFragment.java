@@ -47,6 +47,8 @@ public class MiscFragment extends RecyclerViewFragment implements PopupCardItem.
 
     private SwitchCardView.DSwitchCard mLoggerEnableCard;
 
+    private PopupCardItem.DPopupCard mSelinuxCard;
+
     private SwitchCardView.DSwitchCard mFsyncCard;
     private SwitchCardView.DSwitchCard mDynamicFsyncCard;
 
@@ -72,6 +74,7 @@ public class MiscFragment extends RecyclerViewFragment implements PopupCardItem.
 
         if (Misc.hasVibration()) vibrationInit();
         if (Misc.hasLoggerEnable()) loggerInit();
+        if (Misc.hasSelinux()) selinuxInit();
         fsyncInit();
         if (Misc.hasPowerSuspend()) powersuspendInit();
         networkInit();
@@ -102,6 +105,17 @@ public class MiscFragment extends RecyclerViewFragment implements PopupCardItem.
         mLoggerEnableCard.setOnDSwitchCardListener(this);
 
         addView(mLoggerEnableCard);
+    }
+
+    private void selinuxInit() {
+        String[] items = getResources().getStringArray(R.array.selinux_items);
+        mSelinuxCard = new PopupCardItem.DPopupCard(new ArrayList<>(Arrays.asList(items)));
+        mSelinuxCard.setTitle(getString(R.string.selinux));
+        mSelinuxCard.setDescription(getString(R.string.selinux_summary));
+        mSelinuxCard.setItem(Misc.getSelinux());
+        mSelinuxCard.setOnDPopupCardListener(this);
+
+        addView(mSelinuxCard);
     }
 
     private void fsyncInit() {
@@ -293,6 +307,7 @@ public class MiscFragment extends RecyclerViewFragment implements PopupCardItem.
     public void onItemSelected(PopupCardItem.DPopupCard dPopupCard, int position) {
         if (dPopupCard == mTcpCongestionCard)
             Misc.setTcpCongestion(Misc.getTcpAvailableCongestions().get(position), getActivity());
+        else if (dPopupCard == mSelinuxCard) Misc.setSelinux(position, getActivity());
         else if (dPopupCard == mPowerSuspendModeCard)
             Misc.setPowerSuspendMode(position, getActivity());
     }

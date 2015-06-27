@@ -624,6 +624,9 @@ public interface Constants {
 
     String[] LOGGER_ARRAY = {LOGGER_MODE, LOGGER_ENABLED};
 
+    // SELinux
+    String SELINUX = "selinux";
+
     // Fsync
     String FSYNC = "/sys/devices/virtual/misc/fsynccontrol/fsync_enabled";
     String DYNAMIC_FSYNC = "/sys/kernel/dyn_fsync/Dyn_fsync_active";
@@ -639,7 +642,7 @@ public interface Constants {
     String HOSTNAME_KEY = "net.hostname";
 
     String[][] MISC_ARRAY = {{VIB_ENABLE, SMB135X_WAKELOCK, SENSOR_IND_WAKELOCK, MSM_HSIC_HOST_WAKELOCK, WLAN_RX_WAKELOCK,
-            WLAN_CTRL_WAKELOCK, WLAN_WAKELOCK, WLAN_RX_WAKELOCK_DIVIDER, MSM_HSIC_WAKELOCK_DIVIDER, LOGGER_ENABLED, FSYNC,
+            WLAN_CTRL_WAKELOCK, WLAN_WAKELOCK, WLAN_RX_WAKELOCK_DIVIDER, MSM_HSIC_WAKELOCK_DIVIDER, LOGGER_ENABLED, FSYNC, SELINUX,
             DYNAMIC_FSYNC, POWER_SUSPEND_MODE, POWER_SUSPEND_STATE, TCP_AVAILABLE_CONGESTIONS, HOSTNAME_KEY}, VIBRATION_ARRAY};
 
     // Build prop
